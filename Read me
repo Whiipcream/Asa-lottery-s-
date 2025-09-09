@@ -1,0 +1,30 @@
+# Trade Lottery Discord Bot
+
+Simple Discord bot for running item lotteries.
+
+## Features
+- Sellers create lotteries (attach an image optionally) with a set duration and ticket price.
+- Buyers purchase 1+ tickets; each ticket gets a unique code sent to buyer via DM.
+- At end time, a single winning ticket is chosen at random and winner announced.
+- Data persists to `lotteries_data.json`.
+
+## Commands
+- `!lottery create "Item Name" <duration> <ticket_price> [max_tickets]`
+  - Example: `!lottery create "Golden Sword" 1h 50 100`
+  - Attach an image to the command message if you want an item image.
+- `!buy <count>` — Buy tickets (use in the `#lotteries` display channel).
+- `!mytickets` — DM listing your ticket codes across active lotteries.
+- `!lotterystatus` — Summary of active lotteries.
+- `!endlottery <message_id>` — Admin command to force-end a lottery (Manage Server permission).
+
+## Setup (hoster / friend)
+1. Create a Discord bot at https://discord.com/developers/applications and copy the bot token.
+2. Add the bot to the server with appropriate permissions (Send Messages, Manage Channels if you want it to create channels).
+3. Create a repo and push `bot.py` and `requirements.txt`.
+4. On your host (Railway/Replit/Heroku/etc.) set environment variable `DISCORD_BOT_TOKEN` to the bot token.
+5. Install dependencies and run `bot.py`.
+
+## Notes
+- The bot creates a `Tickets` category and a ticket channel per seller to post results.
+- The display channel is `#lotteries` under category `Lotteries` (auto-created if missing).
+- Payment/currency handling is informational only in this version; integration with server currency can be added later.
